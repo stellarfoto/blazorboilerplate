@@ -10,15 +10,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorBoilerplate.Storage.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201121094346_CreateApplicationDb")]
+    [Migration("20210323231742_CreateApplicationDb")]
     partial class CreateApplicationDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("BlazorBoilerplate.Infrastructure.Storage.DataModels.ApiLogItem", b =>
@@ -32,8 +32,8 @@ namespace BlazorBoilerplate.Storage.Migrations.ApplicationDb
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("IPAddress")
-                        .HasColumnType("nvarchar(45)")
-                        .HasMaxLength(45);
+                        .HasMaxLength(45)
+                        .HasColumnType("nvarchar(45)");
 
                     b.Property<string>("Method")
                         .IsRequired()
@@ -41,23 +41,23 @@ namespace BlazorBoilerplate.Storage.Migrations.ApplicationDb
 
                     b.Property<string>("Path")
                         .IsRequired()
-                        .HasColumnType("nvarchar(2048)")
-                        .HasMaxLength(2048);
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
 
                     b.Property<string>("QueryString")
-                        .HasColumnType("nvarchar(2048)")
-                        .HasMaxLength(2048);
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
 
                     b.Property<string>("RequestBody")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<DateTime>("RequestTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ResponseBody")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<long>("ResponseMillis")
                         .HasColumnType("bigint");
@@ -83,28 +83,29 @@ namespace BlazorBoilerplate.Storage.Migrations.ApplicationDb
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("TenantId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName", "TenantId")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
+                        .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
 
-                    b.HasAnnotation("Finbuckle:MultiTenant", true);
+                    b
+                        .HasAnnotation("Finbuckle:MultiTenant", true);
                 });
 
             modelBuilder.Entity("BlazorBoilerplate.Infrastructure.Storage.DataModels.ApplicationUser", b =>
@@ -121,23 +122,23 @@ namespace BlazorBoilerplate.Storage.Migrations.ApplicationDb
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
 
                     b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -146,12 +147,12 @@ namespace BlazorBoilerplate.Storage.Migrations.ApplicationDb
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -167,29 +168,30 @@ namespace BlazorBoilerplate.Storage.Migrations.ApplicationDb
 
                     b.Property<string>("TenantId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                        .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName", "TenantId")
                         .IsUnique()
-                        .HasName("UserNameIndex")
+                        .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
 
-                    b.HasAnnotation("Finbuckle:MultiTenant", true);
+                    b
+                        .HasAnnotation("Finbuckle:MultiTenant", true);
                 });
 
             modelBuilder.Entity("BlazorBoilerplate.Infrastructure.Storage.DataModels.ApplicationUserRole", b =>
@@ -202,8 +204,8 @@ namespace BlazorBoilerplate.Storage.Migrations.ApplicationDb
 
                     b.Property<string>("TenantId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -211,7 +213,8 @@ namespace BlazorBoilerplate.Storage.Migrations.ApplicationDb
 
                     b.ToTable("AspNetUserRoles");
 
-                    b.HasAnnotation("Finbuckle:MultiTenant", true);
+                    b
+                        .HasAnnotation("Finbuckle:MultiTenant", true);
                 });
 
             modelBuilder.Entity("BlazorBoilerplate.Infrastructure.Storage.DataModels.DbLog", b =>
@@ -275,8 +278,8 @@ namespace BlazorBoilerplate.Storage.Migrations.ApplicationDb
             modelBuilder.Entity("BlazorBoilerplate.Infrastructure.Storage.DataModels.TenantSetting", b =>
                 {
                     b.Property<string>("TenantId")
-                        .HasColumnType("nvarchar(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
 
                     b.Property<string>("Key")
                         .HasColumnType("nvarchar(128)");
@@ -291,7 +294,8 @@ namespace BlazorBoilerplate.Storage.Migrations.ApplicationDb
 
                     b.ToTable("TenantSettings");
 
-                    b.HasAnnotation("Finbuckle:MultiTenant", true);
+                    b
+                        .HasAnnotation("Finbuckle:MultiTenant", true);
                 });
 
             modelBuilder.Entity("BlazorBoilerplate.Infrastructure.Storage.DataModels.Todo", b =>
@@ -321,8 +325,8 @@ namespace BlazorBoilerplate.Storage.Migrations.ApplicationDb
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.HasKey("Id");
 
@@ -357,8 +361,8 @@ namespace BlazorBoilerplate.Storage.Migrations.ApplicationDb
 
                     b.Property<string>("TenantId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -370,7 +374,8 @@ namespace BlazorBoilerplate.Storage.Migrations.ApplicationDb
 
                     b.ToTable("UserProfiles");
 
-                    b.HasAnnotation("Finbuckle:MultiTenant", true);
+                    b
+                        .HasAnnotation("Finbuckle:MultiTenant", true);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -465,6 +470,8 @@ namespace BlazorBoilerplate.Storage.Migrations.ApplicationDb
                         .WithMany("ApiLogItems")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("BlazorBoilerplate.Infrastructure.Storage.DataModels.ApplicationUserRole", b =>
@@ -480,6 +487,10 @@ namespace BlazorBoilerplate.Storage.Migrations.ApplicationDb
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BlazorBoilerplate.Infrastructure.Storage.DataModels.Message", b =>
@@ -489,6 +500,8 @@ namespace BlazorBoilerplate.Storage.Migrations.ApplicationDb
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("BlazorBoilerplate.Infrastructure.Storage.DataModels.Todo", b =>
@@ -500,6 +513,10 @@ namespace BlazorBoilerplate.Storage.Migrations.ApplicationDb
                     b.HasOne("BlazorBoilerplate.Infrastructure.Storage.DataModels.ApplicationUser", "ModifiedBy")
                         .WithMany()
                         .HasForeignKey("ModifiedById");
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("ModifiedBy");
                 });
 
             modelBuilder.Entity("BlazorBoilerplate.Infrastructure.Storage.DataModels.UserProfile", b =>
@@ -509,6 +526,8 @@ namespace BlazorBoilerplate.Storage.Migrations.ApplicationDb
                         .HasForeignKey("BlazorBoilerplate.Infrastructure.Storage.DataModels.UserProfile", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -545,6 +564,22 @@ namespace BlazorBoilerplate.Storage.Migrations.ApplicationDb
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BlazorBoilerplate.Infrastructure.Storage.DataModels.ApplicationRole", b =>
+                {
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("BlazorBoilerplate.Infrastructure.Storage.DataModels.ApplicationUser", b =>
+                {
+                    b.Navigation("ApiLogItems");
+
+                    b.Navigation("Messages");
+
+                    b.Navigation("Profile");
+
+                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

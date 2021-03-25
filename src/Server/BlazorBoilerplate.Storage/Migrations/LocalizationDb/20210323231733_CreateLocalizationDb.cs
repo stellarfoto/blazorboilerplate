@@ -10,13 +10,13 @@ namespace BlazorBoilerplate.Storage.Migrations.LocalizationDb
                 name: "LocalizationRecords",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MsgId = table.Column<string>(nullable: true),
-                    MsgIdPlural = table.Column<string>(nullable: true),
-                    Translation = table.Column<string>(nullable: true),
-                    Culture = table.Column<string>(nullable: true),
-                    ContextId = table.Column<string>(nullable: true)
+                    MsgId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    MsgIdPlural = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Translation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Culture = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    ContextId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -27,9 +27,9 @@ namespace BlazorBoilerplate.Storage.Migrations.LocalizationDb
                 name: "PluralFormRules",
                 columns: table => new
                 {
-                    Language = table.Column<string>(maxLength: 5, nullable: false),
-                    Count = table.Column<int>(nullable: false),
-                    Selector = table.Column<string>(nullable: false)
+                    Language = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
+                    Count = table.Column<int>(type: "int", nullable: false),
+                    Selector = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,11 +40,11 @@ namespace BlazorBoilerplate.Storage.Migrations.LocalizationDb
                 name: "PluralTranslations",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Index = table.Column<int>(nullable: false),
-                    Translation = table.Column<string>(nullable: false),
-                    LocalizationRecordId = table.Column<long>(nullable: false)
+                    Index = table.Column<int>(type: "int", nullable: false),
+                    Translation = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LocalizationRecordId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -10,10 +10,10 @@ namespace BlazorBoilerplate.Storage.Migrations.TenantStoreDb
                 name: "TenantInfo",
                 columns: table => new
                 {
-                    Id = table.Column<string>(maxLength: 64, nullable: false),
-                    Identifier = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: false),
-                    ConnectionString = table.Column<string>(nullable: true)
+                    Id = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
+                    Identifier = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConnectionString = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -9,15 +9,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorBoilerplate.Storage.Migrations.LocalizationDb
 {
     [DbContext(typeof(LocalizationDbContext))]
-    [Migration("20201029172110_CreateLocalizationDb")]
+    [Migration("20210323231733_CreateLocalizationDb")]
     partial class CreateLocalizationDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("BlazorBoilerplate.Infrastructure.Storage.DataModels.LocalizationRecord", b =>
@@ -54,8 +54,8 @@ namespace BlazorBoilerplate.Storage.Migrations.LocalizationDb
             modelBuilder.Entity("BlazorBoilerplate.Infrastructure.Storage.DataModels.PluralFormRule", b =>
                 {
                     b.Property<string>("Language")
-                        .HasColumnType("nvarchar(5)")
-                        .HasMaxLength(5);
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
 
                     b.Property<int>("Count")
                         .HasColumnType("int");
@@ -100,6 +100,13 @@ namespace BlazorBoilerplate.Storage.Migrations.LocalizationDb
                         .HasForeignKey("LocalizationRecordId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("LocalizationRecord");
+                });
+
+            modelBuilder.Entity("BlazorBoilerplate.Infrastructure.Storage.DataModels.LocalizationRecord", b =>
+                {
+                    b.Navigation("PluralTranslations");
                 });
 #pragma warning restore 612, 618
         }

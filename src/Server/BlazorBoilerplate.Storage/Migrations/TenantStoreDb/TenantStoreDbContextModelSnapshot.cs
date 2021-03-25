@@ -14,15 +14,15 @@ namespace BlazorBoilerplate.Storage.Migrations.TenantStoreDb
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Finbuckle.MultiTenant.TenantInfo", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(64)")
-                        .HasMaxLength(64);
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
 
                     b.Property<string>("ConnectionString")
                         .HasColumnType("nvarchar(max)");
@@ -31,7 +31,6 @@ namespace BlazorBoilerplate.Storage.Migrations.TenantStoreDb
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
